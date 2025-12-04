@@ -25,7 +25,7 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./app/*"
       ]
     }
   },
@@ -36,7 +36,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "postcss.config.mjs"  ],
   "exclude": [
     "node_modules"
   ]

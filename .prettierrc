@@ -3,5 +3,10 @@
         "prettier-plugin-tailwindcss"
     ],
     "tailwindStylesheet": "./app/globals.css",
-    "tailwindConfig": "./tailwind.config.ts"
+    "tailwindConfig": "./tailwind.config.ts",
+    "tabWidth": 4,
+    "printWidth": 100,
+    "trailingComma": "all",
+    "endOfLine": "auto",
+    "singleQuote": false
 }
