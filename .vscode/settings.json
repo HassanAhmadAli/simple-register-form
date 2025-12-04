@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "**/.next": true,
+        "**/node_modules": true,
+        "next-env.d.ts": true,
+        ".git": true
+    }
+}
