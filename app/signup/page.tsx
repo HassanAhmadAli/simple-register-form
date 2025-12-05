@@ -18,10 +18,12 @@ import { Input } from "@/components/ui/input";
 import { useGlobalState } from "@/provider/globalState";
 import { formSchema } from "./schema/formSchema";
 import { ModeToggle } from "@/components/mode-toggle";
+import { toast } from "sonner";
 
 const url = "https://images.pexels.com/photos/34710867/pexels-photo-34710867.jpeg";
 export default function SignupPage() {
     const setUser = useGlobalState((state) => state.setUser);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         mode: "onSubmit",
@@ -31,7 +33,8 @@ export default function SignupPage() {
             name: data.fullName,
             email: data.email,
         });
-        console.log("Form submitted:", data);
+        toast.dismiss();
+        toast.success("Registration successful!");
     }
     return (
         <div
@@ -42,7 +45,7 @@ export default function SignupPage() {
                 backgroundRepeat: "no-repeat",
             }}
         >
-            <Card className="w-full max-w-md rounded-lg bg-white/90 p-8 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
+            <Card className="w-full max-w-md rounded-lg bg-green-50 p-8 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
                 <CardHeader>
                     <div className="flex flex-row items-center justify-between">
                         <CardTitle className="text-2xl">Sign Up</CardTitle>
