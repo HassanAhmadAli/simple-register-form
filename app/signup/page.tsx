@@ -3,62 +3,120 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { useGlobalState } from "@/provider/globalState";
 import { formSchema } from "./schema/formSchema";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function SignupPage() {
     const setUser = useGlobalState((state) => state.setUser);
-    const user = useGlobalState((state) => state.user);
-    const { register, handleSubmit, formState } = useForm({
+    const form = useForm({
         resolver: zodResolver(formSchema),
         mode: "onSubmit",
     });
-
-    const onSubmit = (data: z.infer<typeof formSchema>) => {
+    function onSubmit(data: z.infer<typeof formSchema>) {
         setUser({
             name: data.fullName,
             email: data.email,
         });
-    };
-
+        console.log("Form submitted:", data);
+    }
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Label htmlFor="fullName">FullName</Label>
-                <Input
-                    id="fullName"
-                    type="text"
-                    placeholder="Enter your fullName"
-                    {...register("fullName")}
-                />
-                <p>{formState.errors.fullName?.message}</p>
+        <div className="bg-muted/70 flex min-h-screen w-full items-center justify-center p-4">
+            <Card className="w-full max-w-md">
+                <CardHeader>
+                    <div className="flex flex-row items-center justify-between">
+                        <CardTitle className="text-2xl">Sign Up</CardTitle>
+                        <ModeToggle />
+                    </div>
+                    <CardDescription>Enter your information to create an account.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                            <FormField
+                                control={form.control}
+                                name="fullName"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Full Name</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="hassan.ali.36900@outlook.com"
+                                                type="email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                placeholder="8+ characters"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
-                <Label htmlFor="email">Email</Label>
-                <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    {...register("email")}
-                    required
-                />
-                <Label htmlFor="password">Password</Label>
-                <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your Password(8 chars+)"
-                    {...register("password")}
-                />
-                <Label htmlFor="password_confirm">Password</Label>
-                <Input
-                    id="password_confirm"
-                    type="password"
-                    placeholder="Please repeat your password"
-                    {...register("password_confirm")}
-                />
-                <Input className="cursor-pointer" type="submit" />
-            </form>
+                            <FormField
+                                control={form.control}
+                                name="password_confirm"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Confirm Password</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                placeholder="Repeat your password"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" className="w-full">
+                                Create account
+                            </Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
         </div>
     );
 }
