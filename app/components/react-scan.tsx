@@ -6,7 +6,10 @@ export function ReactScan(): JSX.Element {
         if (process.env.NODE_ENV !== "development") {
             return;
         }
-        scan();
+        scan({
+            enabled: true,
+            // trackUnnecessaryRenders: true,
+        });
     }, []);
     return <></>;
 }
