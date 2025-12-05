@@ -1,3 +1,4 @@
+import { ReactScan } from "./components/react-scan";
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -13,6 +14,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
+            <ReactScan />
             <body>
                 <ThemeProvider
                     attribute="class"
