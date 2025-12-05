@@ -19,6 +19,7 @@ import { useGlobalState } from "@/provider/globalState";
 import { formSchema } from "./schema/formSchema";
 import { ModeToggle } from "@/components/mode-toggle";
 
+const url = "https://images.pexels.com/photos/34710867/pexels-photo-34710867.jpeg";
 export default function SignupPage() {
     const setUser = useGlobalState((state) => state.setUser);
     const form = useForm({
@@ -33,8 +34,15 @@ export default function SignupPage() {
         console.log("Form submitted:", data);
     }
     return (
-        <div className="bg-muted/70 flex min-h-screen w-full items-center justify-center p-4">
-            <Card className="w-full max-w-md">
+        <div
+            className="bg-muted/70 flex min-h-screen w-full items-center justify-center p-4"
+            style={{
+                backgroundImage: `url('${url}')`,
+                backgroundSize: "stretch",
+                backgroundRepeat: "no-repeat",
+            }}
+        >
+            <Card className="w-full max-w-md rounded-lg bg-white/90 p-8 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
                 <CardHeader>
                     <div className="flex flex-row items-center justify-between">
                         <CardTitle className="text-2xl">Sign Up</CardTitle>

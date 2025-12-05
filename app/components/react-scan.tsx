@@ -7,7 +7,7 @@ export function ReactScan(): JSX.Element {
             return;
         }
         scan({
-            enabled: true,
+            // enabled: true,
             // trackUnnecessaryRenders: true,
         });
     }, []);
